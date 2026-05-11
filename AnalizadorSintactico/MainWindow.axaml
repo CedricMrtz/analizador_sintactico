@@ -1,0 +1,44 @@
+<Window xmlns="https://github.com/avaloniaui"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        x:Class="AnalizadorSintactico.MainWindow"
+        Title="Calculadora"
+        Width="280" Height="420"
+        CanResize="False">
+
+  <StackPanel Margin="16" Spacing="8">
+
+    <TextBlock Name="Display"
+               Text="0"
+               FontSize="36"
+               TextAlignment="Right"
+               Margin="0,0,0,8"/>
+
+    <Grid ColumnDefinitions="*,*,*,*" RowDefinitions="*,*,*,*,*">
+
+      <Button Content="AC" Click="OnClear"    Grid.Row="0" Grid.Column="0" Margin="3"/>
+      <Button Content="("  Click="OnInput"    Grid.Row="0" Grid.Column="1" Margin="3"/>
+      <Button Content=")"  Click="OnInput"    Grid.Row="0" Grid.Column="2" Margin="3"/>
+      <Button Content="÷"  Click="OnOperator" Grid.Row="0" Grid.Column="3" Margin="3"/>
+
+      <Button Content="7"  Click="OnInput"    Grid.Row="1" Grid.Column="0" Margin="3"/>
+      <Button Content="8"  Click="OnInput"    Grid.Row="1" Grid.Column="1" Margin="3"/>
+      <Button Content="9"  Click="OnInput"    Grid.Row="1" Grid.Column="2" Margin="3"/>
+      <Button Content="×"  Click="OnOperator" Grid.Row="1" Grid.Column="3" Margin="3"/>
+
+      <Button Content="4"  Click="OnInput"    Grid.Row="2" Grid.Column="0" Margin="3"/>
+      <Button Content="5"  Click="OnInput"    Grid.Row="2" Grid.Column="1" Margin="3"/>
+      <Button Content="6"  Click="OnInput"    Grid.Row="2" Grid.Column="2" Margin="3"/>
+      <Button Content="−"  Click="OnOperator" Grid.Row="2" Grid.Column="3" Margin="3"/>
+
+      <Button Content="1"  Click="OnInput"    Grid.Row="3" Grid.Column="0" Margin="3"/>
+      <Button Content="2"  Click="OnInput"    Grid.Row="3" Grid.Column="1" Margin="3"/>
+      <Button Content="3"  Click="OnInput"    Grid.Row="3" Grid.Column="2" Margin="3"/>
+      <Button Content="+"  Click="OnOperator" Grid.Row="3" Grid.Column="3" Margin="3"/>
+
+      <Button Content="0"  Click="OnInput"    Grid.Row="4" Grid.Column="0" Grid.ColumnSpan="2" Margin="3"/>
+      <Button Content="."  Click="OnInput"    Grid.Row="4" Grid.Column="2" Margin="3"/>
+      <Button Content="="   Grid.Row="4" Grid.Column="3" Margin="3"/>
+
+    </Grid>
+  </StackPanel>
+</Window>

@@ -89,3 +89,4 @@
 /Users/cedricmartinez/Downloads/analizador_sintactico/AnalizadorSintactico/obj/Debug/net10.0/AnalizadorSintactico.pdb
 /Users/cedricmartinez/Downloads/analizador_sintactico/AnalizadorSintactico/obj/Debug/net10.0/AnalizadorSintactico.genruntimeconfig.cache
 /Users/cedricmartinez/Downloads/analizador_sintactico/AnalizadorSintactico/obj/Debug/net10.0/ref/AnalizadorSintactico.dll
+/Users/cedricmartinez/Downloads/analizador_sintactico/AnalizadorSintactico/obj/Debug/net10.0/AnalizadorSintactico.sourcelink.json

@@ -1,36 +1,30 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\chema\\OneDrive\\Escritorio\\CETYs\\Automatas\\analizador_sintactico\\AnalizadorSintactico\\AnalizadorSintactico.csproj": {}
+    "/Users/cedricmartinez/Downloads/analizador_sintactico/AnalizadorSintactico/AnalizadorSintactico.csproj": {}
   },
   "projects": {
-    "C:\\Users\\chema\\OneDrive\\Escritorio\\CETYs\\Automatas\\analizador_sintactico\\AnalizadorSintactico\\AnalizadorSintactico.csproj": {
+    "/Users/cedricmartinez/Downloads/analizador_sintactico/AnalizadorSintactico/AnalizadorSintactico.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\chema\\OneDrive\\Escritorio\\CETYs\\Automatas\\analizador_sintactico\\AnalizadorSintactico\\AnalizadorSintactico.csproj",
+        "projectUniqueName": "/Users/cedricmartinez/Downloads/analizador_sintactico/AnalizadorSintactico/AnalizadorSintactico.csproj",
         "projectName": "AnalizadorSintactico",
-        "projectPath": "C:\\Users\\chema\\OneDrive\\Escritorio\\CETYs\\Automatas\\analizador_sintactico\\AnalizadorSintactico\\AnalizadorSintactico.csproj",
-        "packagesPath": "C:\\Users\\chema\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\chema\\OneDrive\\Escritorio\\CETYs\\Automatas\\analizador_sintactico\\AnalizadorSintactico\\obj\\",
+        "projectPath": "/Users/cedricmartinez/Downloads/analizador_sintactico/AnalizadorSintactico/AnalizadorSintactico.csproj",
+        "packagesPath": "/Users/cedricmartinez/.nuget/packages/",
+        "outputPath": "/Users/cedricmartinez/Downloads/analizador_sintactico/AnalizadorSintactico/obj/",
         "projectStyle": "PackageReference",
-        "fallbackFolders": [
-          "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
-        ],
         "configFilePaths": [
-          "C:\\Users\\chema\\AppData\\Roaming\\NuGet\\NuGet.Config",
-          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
-          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
+          "/Users/cedricmartinez/.nuget/NuGet/NuGet.Config"
         ],
         "originalTargetFrameworks": [
           "net10.0"
         ],
         "sources": {
-          "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
+          "/opt/homebrew/Cellar/dotnet/10.0.107/libexec/library-packs": {},
           "https://api.nuget.org/v3/index.json": {}
         },
         "frameworks": {
           "net10.0": {
-            "framework": "net10.0",
             "targetAlias": "net10.0",
             "projectReferences": {}
           }
@@ -45,11 +39,10 @@
           "auditLevel": "low",
           "auditMode": "all"
         },
-        "SdkAnalysisLevel": "10.0.300"
+        "SdkAnalysisLevel": "10.0.100"
       },
       "frameworks": {
         "net10.0": {
-          "framework": "net10.0",
           "targetAlias": "net10.0",
           "dependencies": {
             "Avalonia": {
@@ -89,7 +82,7 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\10.0.300/PortableRuntimeIdentifierGraph.json",
+          "runtimeIdentifierGraphPath": "/opt/homebrew/Cellar/dotnet/10.0.107/libexec/sdk/10.0.107/PortableRuntimeIdentifierGraph.json",
           "packagesToPrune": {
             "Microsoft.CSharp": "(,4.7.32767]",
             "Microsoft.VisualBasic": "(,10.4.32767]",

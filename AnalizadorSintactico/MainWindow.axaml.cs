@@ -41,47 +41,30 @@ public partial class MainWindow : Window
       Display.Text = expression == "" ? "0" : expression;
       ValidarSintaxis(expression);
     }
-
+    
     void ValidarSintaxis(string expression){
-      if (string.IsNullOrWhiteSpace(expression))
-    {
+      if (string.IsNullOrWhiteSpace(expression)){
         StatusText.Text = "";
         return;
-    }
+      }
 
-    try
-    {
-        Parser parser = new Parser(expression);
-
-        bool valido = parser.S();
-
-        if (valido)
-        {
-            StatusText.Text = "Expresión correcta";
-        }
-        else
-        {
-            // permitir expresiones incompletas normales
-            char ultimo = expression[^1];
-
-            if ("+-*/^(".Contains(ultimo))
-            {
-                StatusText.Text = "Escribiendo...";
-            }
-            else
-            {
-                StatusText.Text = "Expresión incorrecta";
-            }
-        }
-    }
-    catch
-    {
+      char ultimo = expression[^1];
+      if ("+-*/^(".Contains(ultimo)){
         StatusText.Text = "Expresión incorrecta";
-    }
+        return;
+      }
+
+      try {
+        Parser parser = new Parser(expression);
+        bool valido = parser.S() && parser.IsAtEnd();
+        StatusText.Text = valido ? "Expresión correcta" : "Expresión incorrecta";
+      }
+      catch {
+        StatusText.Text = "Expresión incorrecta";
+      }
     }
 
-   void OnEquals(object sender, RoutedEventArgs e)
-{
+   void OnEquals(object sender, RoutedEventArgs e){
     Parser parser = new Parser(expression);
 
     bool valido = parser.S() && parser.IsAtEnd();

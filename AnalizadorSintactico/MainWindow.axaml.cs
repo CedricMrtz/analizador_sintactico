@@ -1,5 +1,6 @@
 using Avalonia.Controls;
 using Avalonia.Interactivity;
+using System.Data;
 
 namespace AnalizadorSintactico;
 
@@ -22,6 +23,10 @@ public partial class MainWindow : Window
       expression += op;
       Display.Text = expression;
       ValidarSintaxis(expression);
+
+      char ultimo = expression[^1];
+      if ("+-*/^".Contains(ultimo))
+      return;
     }
 
     void OnClear(object sender, RoutedEventArgs e){
@@ -38,6 +43,71 @@ public partial class MainWindow : Window
     }
 
     void ValidarSintaxis(string expression){
-
+      if (string.IsNullOrWhiteSpace(expression))
+    {
+        StatusText.Text = "";
+        return;
     }
+
+    try
+    {
+        Parser parser = new Parser(expression);
+
+        bool valido = parser.S();
+
+        if (valido)
+        {
+            StatusText.Text = "Expresión correcta";
+        }
+        else
+        {
+            // permitir expresiones incompletas normales
+            char ultimo = expression[^1];
+
+            if ("+-*/^(".Contains(ultimo))
+            {
+                StatusText.Text = "Escribiendo...";
+            }
+            else
+            {
+                StatusText.Text = "Expresión incorrecta";
+            }
+        }
+    }
+    catch
+    {
+        StatusText.Text = "Expresión incorrecta";
+    }
+    }
+
+   void OnEquals(object sender, RoutedEventArgs e)
+{
+    Parser parser = new Parser(expression);
+
+    bool valido = parser.S() && parser.IsAtEnd();
+
+    if (!valido)
+    {
+        Display.Text = "Error";
+        StatusText.Text = "Expresión incorrecta";
+        return;
+    }
+
+    try
+    {
+        var expr = expression.Replace("^", "*");
+
+        var resultado = new System.Data.DataTable()
+            .Compute(expr, null);
+
+        Display.Text = resultado.ToString();
+
+        expression = resultado.ToString()!;
+        StatusText.Text = "Expresión correcta";
+    }
+    catch
+    {
+        Display.Text = "Error";
+    }
+}
 }

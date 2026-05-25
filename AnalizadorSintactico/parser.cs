@@ -67,18 +67,24 @@ class Parser{
     return true;
   }
   
-  //P -> E^P | E
-  bool P(){
+//P -> E^P | E
+bool P()
+{
     int save = pos;
-    if(E() && Consume('^') && P()){
-      return true;
+
+    if (E())
+    {
+        if (Consume('^'))
+        {
+            return P();
+        }
+
+        return true;
     }
-    if(E()){
-      return true;
-    }
+
     pos = save;
     return false;
-  }
+}
 
   //E -> -F | F
   bool E(){

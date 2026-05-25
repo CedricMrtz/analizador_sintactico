@@ -13,6 +13,11 @@
                TextAlignment="Right"
                Margin="0,0,0,8"/>
 
+    <TextBlock Name="StatusText"
+               Text=""
+               FontSize="18"
+               HorizontalAlignment="Center"/>
+
     <Grid ColumnDefinitions="*,*,*,*" RowDefinitions="*,*,*,*,*">
 
       <Button Content="AC" Click="OnClear" Grid.Row="0" Grid.Column="0" Margin="3"/>
@@ -38,7 +43,7 @@
       <Button Content="0" Click="OnInput" Grid.Row="4" Grid.Column="0" Grid.ColumnSpan="2" Margin="3"/>
       <Button Content="Borrar" Click="OnBackspace" Grid.Row="4" Grid.Column="1" Grid.ColumnSpan="2" Margin="3"/>
       <Button Content="." Click="OnInput" Grid.Row="4" Grid.Column="2" Margin="3"/>
-      <Button Content="=" Grid.Row="4" Grid.Column="3" Margin="3"/>
+      <Button Content="=" Click="OnEquals" Grid.Row="4" Grid.Column="3" Margin="3"/>
 
     </Grid>
   </StackPanel>

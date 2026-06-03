@@ -28,3 +28,12 @@ build_metadata.AdditionalFiles.SourceItemGroup = AvaloniaXaml
 
 [/Users/cedricmartinez/Downloads/analizador_sintactico/AnalizadorSintactico/MainWindow.axaml]
 build_metadata.AdditionalFiles.SourceItemGroup = AvaloniaXaml
+
+[/Users/cedricmartinez/Downloads/analizador_sintactico/AnalizadorSintactico/tabs/Expresion.axaml]
+build_metadata.AdditionalFiles.SourceItemGroup = AvaloniaXaml
+
+[/Users/cedricmartinez/Downloads/analizador_sintactico/AnalizadorSintactico/tabs/historial.axaml]
+build_metadata.AdditionalFiles.SourceItemGroup = AvaloniaXaml
+
+[/Users/cedricmartinez/Downloads/analizador_sintactico/AnalizadorSintactico/tabs/tabladerivacion.axaml]
+build_metadata.AdditionalFiles.SourceItemGroup = AvaloniaXaml

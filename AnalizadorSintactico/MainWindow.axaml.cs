@@ -11,14 +11,15 @@ public partial class MainWindow : Window
 
     public MainWindow() => InitializeComponent();
 
-    void OnInput(object sender, RoutedEventArgs e){
-      expression += ((Button)sender).Content;
+    public void Input(string value)
+    {
+      expression += value;
       Display.Text = expression;
       ValidarSintaxis(expression);
     }
 
-    void OnOperator(object sender, RoutedEventArgs e){
-      var symbol = ((Button)sender).Content!.ToString()!;
+    public void Operator(string symbol)
+    {
       var op = symbol switch { "÷" => "/", "×" => "*", "−" => "-", _ => symbol };
       expression += op;
       Display.Text = expression;
@@ -29,13 +30,13 @@ public partial class MainWindow : Window
       return;
     }
 
-    void OnClear(object sender, RoutedEventArgs e){
+    public void Clear(){
       expression = "";
       Display.Text = "0";
       ValidarSintaxis(expression);
     }
 
-    void OnBackspace(object sender, RoutedEventArgs e){
+    public void Backspace(){
       if (expression.Length == 0) return;
       expression = expression[..^1];
       Display.Text = expression == "" ? "0" : expression;
@@ -64,7 +65,7 @@ public partial class MainWindow : Window
       }
     }
 
-   void OnEquals(object sender, RoutedEventArgs e){
+  public void Equals(){
     Parser parser = new Parser(expression);
 
     bool valido = parser.S() && parser.IsAtEnd();

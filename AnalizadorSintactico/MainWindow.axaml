@@ -21,17 +21,14 @@
       <Setter Property="FontWeight" Value="SemiBold"/>
     </Style>
 
-    <!-- Quitar hover del TabItem -->
     <Style Selector="TabItem:pointerover /template/ Border#PART_LayoutRoot">
       <Setter Property="Background" Value="#FFE2E8F0"/>
     </Style>
 
-    <!-- Quitar hover del TabItem seleccionado -->
     <Style Selector="TabItem:selected:pointerover /template/ Border#PART_LayoutRoot">
       <Setter Property="Background" Value="White"/>
     </Style>
 
-    <!-- Base -->
     <Style Selector="Button.calc-key">
       <Setter Property="Background" Value="#FF1E293B"/>
       <Setter Property="BorderBrush" Value="#FF334155"/>
@@ -40,7 +37,6 @@
       <Setter Property="CornerRadius" Value="10"/>
       <Setter Property="MinHeight" Value="42"/>
     </Style>
-    <!-- Sin hover -->
     <Style Selector="Button.calc-key:pointerover /template/ ContentPresenter">
       <Setter Property="Background" Value="#FF1E293B"/>
     </Style>

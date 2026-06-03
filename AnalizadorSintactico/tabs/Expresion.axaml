@@ -4,30 +4,30 @@
 
 <Grid ColumnDefinitions="*,*,*,*" RowDefinitions="*,*,*,*,*" Margin="0,12,0,0">
 
-    <Button Classes="calc-key danger" Content="AC"     Click="OnClear"     Grid.Row="0" Grid.Column="0" Margin="3"/>
-    <Button Classes="calc-key"        Content="("      Click="OnInput"     Grid.Row="0" Grid.Column="1" Margin="3"/>
-    <Button Classes="calc-key"        Content=")"      Click="OnInput"     Grid.Row="0" Grid.Column="2" Margin="3"/>
-    <Button Classes="calc-key operator" Content="÷"   Click="OnOperator"  Grid.Row="0" Grid.Column="3" Margin="3"/>
+    <Button Classes="calc-key danger" Content="AC" Click="OnClear" Grid.Row="0" Grid.Column="0" Margin="3"/>
+    <Button Classes="calc-key" Content="(" Click="OnInput" Grid.Row="0" Grid.Column="1" Margin="3"/>
+    <Button Classes="calc-key" Content=")" Click="OnInput" Grid.Row="0" Grid.Column="2" Margin="3"/>
+    <Button Classes="calc-key operator" Content="÷" Click="OnOperator" Grid.Row="0" Grid.Column="3" Margin="3"/>
 
     <Button Classes="calc-key" Content="7" Click="OnInput" Grid.Row="1" Grid.Column="0" Margin="3"/>
     <Button Classes="calc-key" Content="8" Click="OnInput" Grid.Row="1" Grid.Column="1" Margin="3"/>
     <Button Classes="calc-key" Content="9" Click="OnInput" Grid.Row="1" Grid.Column="2" Margin="3"/>
-    <Button Classes="calc-key operator" Content="x"   Click="OnOperator"  Grid.Row="1" Grid.Column="3" Margin="3"/>
+    <Button Classes="calc-key operator" Content="x" Click="OnOperator" Grid.Row="1" Grid.Column="3" Margin="3"/>
 
     <Button Classes="calc-key" Content="4" Click="OnInput" Grid.Row="2" Grid.Column="0" Margin="3"/>
     <Button Classes="calc-key" Content="5" Click="OnInput" Grid.Row="2" Grid.Column="1" Margin="3"/>
     <Button Classes="calc-key" Content="6" Click="OnInput" Grid.Row="2" Grid.Column="2" Margin="3"/>
-    <Button Classes="calc-key operator" Content="-"   Click="OnOperator"  Grid.Row="2" Grid.Column="3" Margin="3"/>
+    <Button Classes="calc-key operator" Content="-" Click="OnOperator"  Grid.Row="2" Grid.Column="3" Margin="3"/>
 
     <Button Classes="calc-key" Content="1" Click="OnInput" Grid.Row="3" Grid.Column="0" Margin="3"/>
     <Button Classes="calc-key" Content="2" Click="OnInput" Grid.Row="3" Grid.Column="1" Margin="3"/>
     <Button Classes="calc-key" Content="3" Click="OnInput" Grid.Row="3" Grid.Column="2" Margin="3"/>
-    <Button Classes="calc-key operator" Content="+"   Click="OnOperator"  Grid.Row="3" Grid.Column="3" Margin="3"/>
+    <Button Classes="calc-key operator" Content="+" Click="OnOperator" Grid.Row="3" Grid.Column="3" Margin="3"/>
 
-    <Button Classes="calc-key"        Content="0"      Click="OnInput"     Grid.Row="4" Grid.Column="0" Grid.ColumnSpan="2" Margin="3"/>
-    <Button Classes="calc-key danger" Content="Borrar" Click="OnBackspace" Grid.Row="4" Grid.Column="2"                     Margin="3"/>
-    <Button Classes="calc-key"        Content="."      Click="OnInput"     Grid.Row="4" Grid.Column="2" Margin="3"/>
-    <Button Classes="calc-key operator" Content="="   Click="OnEquals"    Grid.Row="4" Grid.Column="3" Margin="3"/>
+    <Button Classes="calc-key" Content="0" Click="OnInput" Grid.Row="4" Grid.Column="0" Grid.ColumnSpan="2" Margin="3"/>
+    <Button Classes="calc-key danger" Content="Borrar" Click="OnBackspace" Grid.Row="4" Grid.Column="2" Margin="3"/>
+    <Button Classes="calc-key" Content="." Click="OnInput" Grid.Row="4" Grid.Column="2" Margin="3"/>
+    <Button Classes="calc-key operator" Content="=" Click="OnEquals" Grid.Row="4" Grid.Column="3" Margin="3"/>
 
 </Grid>
 

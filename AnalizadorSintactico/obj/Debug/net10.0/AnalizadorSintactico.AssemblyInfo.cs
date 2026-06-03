@@ -13,7 +13,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("AnalizadorSintactico")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+9b3accda30b8b41222b24501e2d798ea22ff2b25")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+baf25a79992a86e17b31bc59a746eb7e695c466d")]
 [assembly: System.Reflection.AssemblyProductAttribute("AnalizadorSintactico")]
 [assembly: System.Reflection.AssemblyTitleAttribute("AnalizadorSintactico")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]

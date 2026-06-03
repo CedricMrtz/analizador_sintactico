@@ -20,7 +20,7 @@ public partial class MainWindow : Window
 
     public void Operator(string symbol)
     {
-      var op = symbol switch { "÷" => "/", "×" => "*", "−" => "-", _ => symbol };
+      var op = symbol switch { "÷" => "/", "x" => "*", "-" => "-", _ => symbol };
       expression += op;
       Display.Text = expression;
       ValidarSintaxis(expression);

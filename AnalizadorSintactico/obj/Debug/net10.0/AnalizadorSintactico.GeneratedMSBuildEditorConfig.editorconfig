@@ -29,6 +29,9 @@ build_metadata.AdditionalFiles.SourceItemGroup = AvaloniaXaml
 [/Users/cedricmartinez/Downloads/analizador_sintactico/AnalizadorSintactico/MainWindow.axaml]
 build_metadata.AdditionalFiles.SourceItemGroup = AvaloniaXaml
 
+[/Users/cedricmartinez/Downloads/analizador_sintactico/AnalizadorSintactico/tabs/arbolderivacion.axaml]
+build_metadata.AdditionalFiles.SourceItemGroup = AvaloniaXaml
+
 [/Users/cedricmartinez/Downloads/analizador_sintactico/AnalizadorSintactico/tabs/Expresion.axaml]
 build_metadata.AdditionalFiles.SourceItemGroup = AvaloniaXaml
 

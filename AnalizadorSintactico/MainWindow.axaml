@@ -75,9 +75,15 @@
         <TabItem Header="1">
           <tabs:Expresion/>
         </TabItem>
-        <TabItem Header="2"></TabItem>
-        <TabItem Header="3"/>
-        <TabItem Header="4"/>
+        <TabItem Header="2">
+          <tabs:Historial/>
+        </TabItem>
+        <TabItem Header="3">
+          <tabs:TablaDerivacion/>
+        </TabItem>
+        <TabItem Header="4">
+          <tabs:ArbolDerivacion/>
+        </TabItem>
       </TabControl>
     </StackPanel>
   </Border>

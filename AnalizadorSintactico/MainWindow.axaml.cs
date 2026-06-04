@@ -1,6 +1,7 @@
 using Avalonia.Controls;
 using Avalonia.Interactivity;
 using System.Data;
+using AnalizadorSintactico.Tabs;
 
 namespace AnalizadorSintactico;
 
@@ -86,6 +87,7 @@ public partial class MainWindow : Window
 
         Display.Text = resultado.ToString();
 
+      Historial.AddEntry($"{expression} = {resultado}");
         expression = resultado.ToString()!;
         StatusText.Text = "Expresión correcta";
     }

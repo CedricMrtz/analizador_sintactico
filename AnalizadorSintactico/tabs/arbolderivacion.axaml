@@ -1,9 +1,9 @@
 <UserControl xmlns="https://github.com/avaloniaui"
                             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
                 xmlns:tabs="clr-namespace:AnalizadorSintactico.Tabs"
-                x:DataType="tabs:TablaDerivacion"
-                            x:Class="AnalizadorSintactico.Tabs.TablaDerivacion">
-        <TextBlock Text="Tabla de derivación"
+                x:DataType="tabs:ArbolDerivacion"
+                            x:Class="AnalizadorSintactico.Tabs.ArbolDerivacion">
+        <TextBlock Text="Árbol de derivación"
                  HorizontalAlignment="Center"
                  VerticalAlignment="Center"
                  Foreground="#FF64748B"/>

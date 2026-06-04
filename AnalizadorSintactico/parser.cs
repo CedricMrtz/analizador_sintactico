@@ -95,7 +95,7 @@ public class Parser {
         return true;
     }
 
-    // P → E^P | E  (se prueba E^P primero)
+    // P → E^P | E
     bool P() {
         Save(out var p, out var sc, out var sf);
 
@@ -137,20 +137,30 @@ public class Parser {
         return false;
     }
 
-    // N → número real (reemplaza N con el literal consumido)
+    // N → DN | D.N | D
     bool N() {
-        int save = pos;
+        Save(out var p, out var sc, out var sf);
+
+        RecordStep("N", "D.N");
+        if (D() && Consume('.') && N()) return true;
+        Restore(p, sc, sf);
+
+        RecordStep("N", "DN");
+        if (D() && N()) return true;
+        Restore(p, sc, sf);
+
+        RecordStep("N", "D");
+        if (D()) return true;
+        Restore(p, sc, sf);
+
+        return false;
+    }
+
+    // D → 0 | 1 | ... | 9
+    bool D() {
         if (!isDigit()) return false;
-
-        int start = pos;
-        while (isDigit()) pos++;
-        if (current() == '.') {
-            pos++;
-            if (!isDigit()) { pos = save; return false; }
-            while (isDigit()) pos++;
-        }
-
-        RecordStep("N", input[start..pos]);
+        RecordStep("D", current().ToString());
+        pos++;
         return true;
     }
 }

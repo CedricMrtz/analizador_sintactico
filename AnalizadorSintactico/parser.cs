@@ -1,159 +1,156 @@
 using System.Collections.Generic;
 namespace AnalizadorSintactico;
 
-class Parser{
-  string input;
-  int pos = 0;
-  public List<string> Tokens { get; } = new List<string>();
-
-  public Parser(string input){
-    this.input = input;
-  }
-
-  public bool IsAtEnd() => pos >= input.Length;
-  char current() => pos< input.Length ? input[pos] : '\0';
-
-  bool Consume(char c){
-    if (current() == c){
-      pos++;
-      return true;
-    }
-    return false;
-  }
-
-  bool isDigit() => current() >= '0' && current() <= '9';
-
-  //S -> CA
-  public bool S(){
-    int save = pos;
-    if(C() && A()){
-      Tokens.Add("S -> CA");
-      return true;
-    }
-    pos = save;
-    return false;
-  }
-
-  //A -> +CA | -CA | epsilon
-  bool A(){
-    int save = pos;
-    if(Consume('+') && C() && A()){
-      Tokens.Add("A -> +CA");
-      return true;
-    }
-    if(Consume('-') && C() && A()){
-      Tokens.Add("A -> -CA");
-      return true;
-    }
-    pos = save;
-    return true; //epsilon
-  }
-  
-  //C -> PB
-  bool C(){
-    int save = pos;
-    if(P() && B()){
-      Tokens.Add("C -> PB");
-      return true;
-    }
-    pos = save;
-    return false;
-  }
-
-  //B -> *PB | /PB | epsilon
-  bool B(){
-    int save = pos;
-    if(Consume('*') && P() && B()){
-      Tokens.Add("B -> *PB");
-      return true;
-    }
-    if(Consume('/') && P() && B()){
-      Tokens.Add("B -> /PB");
-      return true;
-    }
-    pos = save;
-    return true;
-  }
-  
-//P -> E^P | E
-bool P()
-{
-    int save = pos;
-
-    if (E())
-    {
-        if (Consume('^'))
-        {
-            Tokens.Add("P -> E^P");
-            return P();
-        }
-
-        Tokens.Add("P -> E");
-        return true;
-    }
-
-    pos = save;
-    return false;
+public class DerivationStep {
+    public string Rule { get; set; } = "";
+    public string SententialForm { get; set; } = "";
 }
 
-  //E -> -F | F
-  bool E(){
-    int save = pos;
-    if(Consume('-') && F()){
-      Tokens.Add("E -> -F");
-      return true;
-    }
-    if(F()){
-      Tokens.Add("E -> F");
-      return true;
-    }
-    pos = save;
-    return false;
-  }
+public class Parser {
+    string input;
+    int pos = 0;
+    public List<DerivationStep> Steps { get; } = new();
+    private string currentForm = "S";
 
-  //F -> (S) | N
-  bool F(){
-    int save = pos;
-    if(Consume('(') && S() && Consume(')')){
-      Tokens.Add("F -> (S)");
-      return true;
-    }
-    if(N()){
-      Tokens.Add("F -> N");
-      return true;
-    }
-    pos = save;
-    return false;
-  }
+    public Parser(string input) { this.input = input; }
 
-  //N -> DN | D | D.N
-  bool N(){
-    int save = pos;
+    public bool IsAtEnd() => pos >= input.Length;
+    char current() => pos < input.Length ? input[pos] : '\0';
 
-    if(ConsumeDigit()){
-      Tokens.Add("N -> D");
-      return true;
+    bool Consume(char c) {
+        if (current() == c) { pos++; return true; }
+        return false;
+    }
+    bool isDigit() => current() >= '0' && current() <= '9';
+
+    // Reemplaza el primer no-terminal en la forma sentencial actual
+    void RecordStep(string nonTerminal, string production) {
+        string replacement = production == "ε" ? "" : production;
+        int idx = currentForm.IndexOf(nonTerminal);
+        if (idx >= 0)
+            currentForm = currentForm[..idx] + replacement + currentForm[(idx + nonTerminal.Length)..];
+        Steps.Add(new DerivationStep {
+            Rule = $"{nonTerminal} → {production}",
+            SententialForm = currentForm == "" ? "ε" : currentForm
+        });
     }
 
-    if(ConsumeDigit() && N()){
-      Tokens.Add("N -> DN");
-      return true;
+    // Helpers para guardar/restaurar estado incluyendo los pasos
+    void Save(out int p, out int sc, out string sf) {
+        p = pos; sc = Steps.Count; sf = currentForm;
+    }
+    void Restore(int p, int sc, string sf) {
+        pos = p;
+        if (Steps.Count > sc) Steps.RemoveRange(sc, Steps.Count - sc);
+        currentForm = sf;
     }
 
-      if(ConsumeDigit() && Consume('.') && ConsumeDigit()){
-      Tokens.Add("N -> D.N");
-      return true;
+    // S → CA
+    public bool S() {
+        Save(out var p, out var sc, out var sf);
+        RecordStep("S", "CA");
+        if (C() && A()) return true;
+        Restore(p, sc, sf);
+        return false;
     }
-    pos = save;
-    return false;
-  }
 
-    bool ConsumeDigit(){
-      if (isDigit()){
-        pos++;
+    // A → +CA | -CA | ε
+    bool A() {
+        Save(out var p, out var sc, out var sf);
+
+        RecordStep("A", "+CA");
+        if (Consume('+') && C() && A()) return true;
+        Restore(p, sc, sf);
+
+        RecordStep("A", "-CA");
+        if (Consume('-') && C() && A()) return true;
+        Restore(p, sc, sf);
+
+        RecordStep("A", "ε");
         return true;
-      }
-      return false;
     }
 
+    // C → PB
+    bool C() {
+        Save(out var p, out var sc, out var sf);
+        RecordStep("C", "PB");
+        if (P() && B()) return true;
+        Restore(p, sc, sf);
+        return false;
+    }
+
+    // B → *PB | /PB | ε
+    bool B() {
+        Save(out var p, out var sc, out var sf);
+
+        RecordStep("B", "*PB");
+        if (Consume('*') && P() && B()) return true;
+        Restore(p, sc, sf);
+
+        RecordStep("B", "/PB");
+        if (Consume('/') && P() && B()) return true;
+        Restore(p, sc, sf);
+
+        RecordStep("B", "ε");
+        return true;
+    }
+
+    // P → E^P | E  (se prueba E^P primero)
+    bool P() {
+        Save(out var p, out var sc, out var sf);
+
+        RecordStep("P", "E^P");
+        if (E() && Consume('^') && P()) return true;
+        Restore(p, sc, sf);
+
+        RecordStep("P", "E");
+        if (E()) return true;
+        Restore(p, sc, sf);
+        return false;
+    }
+
+    // E → -F | F
+    bool E() {
+        Save(out var p, out var sc, out var sf);
+
+        RecordStep("E", "-F");
+        if (Consume('-') && F()) return true;
+        Restore(p, sc, sf);
+
+        RecordStep("E", "F");
+        if (F()) return true;
+        Restore(p, sc, sf);
+        return false;
+    }
+
+    // F → (S) | N
+    bool F() {
+        Save(out var p, out var sc, out var sf);
+
+        RecordStep("F", "(S)");
+        if (Consume('(') && S() && Consume(')')) return true;
+        Restore(p, sc, sf);
+
+        RecordStep("F", "N");
+        if (N()) return true;
+        Restore(p, sc, sf);
+        return false;
+    }
+
+    // N → número real (reemplaza N con el literal consumido)
+    bool N() {
+        int save = pos;
+        if (!isDigit()) return false;
+
+        int start = pos;
+        while (isDigit()) pos++;
+        if (current() == '.') {
+            pos++;
+            if (!isDigit()) { pos = save; return false; }
+            while (isDigit()) pos++;
+        }
+
+        RecordStep("N", input[start..pos]);
+        return true;
+    }
 }

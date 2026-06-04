@@ -1,29 +1,46 @@
 <UserControl xmlns="https://github.com/avaloniaui"
-                            xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-                xmlns:tabs="clr-namespace:AnalizadorSintactico.Tabs"
-                x:DataType="tabs:TablaDerivacion"
-                            x:Class="AnalizadorSintactico.Tabs.TablaDerivacion">
-        <StackPanel Spacing="8">
-            <TextBlock Text="Tabla de derivación"
-                 FontSize="18"
-                 FontWeight="SemiBold"
-                 Foreground="#FF0F172A"/>
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:tabs="clr-namespace:AnalizadorSintactico.Tabs"
+             xmlns:local="clr-namespace:AnalizadorSintactico"
+             x:DataType="tabs:TablaDerivacion"
+             x:Class="AnalizadorSintactico.Tabs.TablaDerivacion">
 
-            <ListBox ItemsSource="{Binding Tokens}"
-                     Background="Transparent"
-                     BorderThickness="0">
-                <ListBox.ItemTemplate>
-                    <DataTemplate>
-                        <Border Margin="0,0,0,8"
-                                Padding="10"
-                                CornerRadius="10"
-                                Background="White"
-                                BorderBrush="#FFE2E8F0"
-                                BorderThickness="1">
-                            <TextBlock Text="{Binding}" TextWrapping="Wrap" Foreground="#FF334155"/>
-                        </Border>
+    <Grid RowDefinitions="Auto,Auto,*" RowSpacing="8">
+
+        <TextBlock Text="Tabla de derivación"
+                   FontSize="18" FontWeight="SemiBold"
+                   Foreground="#FF0F172A"/>
+
+        <Grid Grid.Row="1" ColumnDefinitions="*,*">
+            <TextBlock Grid.Column="0" Text="Regla aplicada"
+                       FontWeight="SemiBold" Foreground="#FF64748B" Margin="4,0"/>
+            <TextBlock Grid.Column="1" Text="Forma sentencial"
+                       FontWeight="SemiBold" Foreground="#FF64748B" Margin="4,0"/>
+        </Grid>
+
+        <ScrollViewer Grid.Row="2"
+                      VerticalScrollBarVisibility="Auto"
+                      HorizontalScrollBarVisibility="Disabled"
+                      Height="320">
+            <ItemsControl ItemsSource="{Binding Steps}">
+                <ItemsControl.ItemTemplate>
+                    <DataTemplate x:DataType="local:DerivationStep">
+                        <Grid ColumnDefinitions="*,*" Margin="0,0,0,4">
+                            <TextBlock Grid.Column="0"
+                                       Text="{Binding Rule}"
+                                       Foreground="#FF334155"
+                                       Margin="4,2"/>
+                            <TextBlock Grid.Column="1"
+                                       Text="{Binding SententialForm}"
+                                       Foreground="#FF0F172A"
+                                       FontFamily="Consolas,Monospace"
+                                       TextWrapping="Wrap"
+                                       Margin="4,2"/>
+                        </Grid>
                     </DataTemplate>
-                </ListBox.ItemTemplate>
-            </ListBox>
-        </StackPanel>
+                </ItemsControl.ItemTemplate>
+            </ItemsControl>
+        </ScrollViewer>
+
+    </Grid>
 </UserControl>

@@ -1,4 +1,5 @@
 using Avalonia.Controls;
+using AnalizadorSintactico;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 
@@ -6,22 +7,19 @@ namespace AnalizadorSintactico.Tabs;
 
 public partial class TablaDerivacion : UserControl
 {
-	private static readonly ObservableCollection<string> SharedTokens = new();
+    private static readonly ObservableCollection<DerivationStep> SharedSteps = new();
+    public ObservableCollection<DerivationStep> Steps => SharedSteps;
 
-	public ObservableCollection<string> Tokens => SharedTokens;
+    public TablaDerivacion()
+    {
+        InitializeComponent();
+        DataContext = this;
+    }
 
-	public TablaDerivacion()
-	{
-		InitializeComponent();
-		DataContext = this;
-	}
-
-	public static void SetTokens(IEnumerable<string> tokens)
-	{
-		SharedTokens.Clear();
-		foreach (var token in tokens)
-		{
-			SharedTokens.Add(token);
-		}
-	}
+    public static void SetSteps(IEnumerable<DerivationStep> steps)
+    {
+        SharedSteps.Clear();
+        foreach (var step in steps)
+            SharedSteps.Add(step);
+    }
 }

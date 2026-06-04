@@ -48,14 +48,14 @@ public partial class MainWindow : Window
     void ValidarSintaxis(string expression){
       if (string.IsNullOrWhiteSpace(expression)){
         StatusText.Text = "";
-        TablaDerivacion.SetTokens(Array.Empty<string>());
+        TablaDerivacion.SetSteps(Array.Empty<DerivationStep>());
         return;
       }
 
       char ultimo = expression[^1];
       if ("+-*/^(".Contains(ultimo)){
         StatusText.Text = "Expresión incorrecta";
-        TablaDerivacion.SetTokens(Array.Empty<string>());
+        TablaDerivacion.SetSteps(Array.Empty<DerivationStep>());
         return;
       }
 
@@ -63,11 +63,11 @@ public partial class MainWindow : Window
         Parser parser = new Parser(expression);
         bool valido = parser.S() && parser.IsAtEnd();
         StatusText.Text = valido ? "Expresión correcta" : "Expresión incorrecta";
-        TablaDerivacion.SetTokens(valido ? parser.Tokens : Array.Empty<string>());
+        TablaDerivacion.SetSteps(valido ? parser.Steps : Array.Empty<DerivationStep>());
       }
       catch {
         StatusText.Text = "Expresión incorrecta";
-        TablaDerivacion.SetTokens(Array.Empty<string>());
+        TablaDerivacion.SetSteps(Array.Empty<DerivationStep>());
       }
     }
 
@@ -75,7 +75,7 @@ public partial class MainWindow : Window
     Parser parser = new Parser(expression);
 
     bool valido = parser.S() && parser.IsAtEnd();
-    TablaDerivacion.SetTokens(valido ? parser.Tokens : Array.Empty<string>());
+    TablaDerivacion.SetSteps(valido ? parser.Steps : Array.Empty<DerivationStep>());
 
     if (!valido)
     {

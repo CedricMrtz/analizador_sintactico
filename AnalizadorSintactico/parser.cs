@@ -18,12 +18,13 @@ public class Parser {
     char current() => pos < input.Length ? input[pos] : '\0';
 
     bool Consume(char c) {
-        if (current() == c) { pos++; return true; }
+        if (current() == c){ 
+            pos++; return true;
+        }
         return false;
     }
     bool isDigit() => current() >= '0' && current() <= '9';
 
-    // Reemplaza el primer no-terminal en la forma sentencial actual
     void RecordStep(string nonTerminal, string production) {
         string replacement = production == "ε" ? "" : production;
         int idx = currentForm.IndexOf(nonTerminal);
@@ -35,7 +36,6 @@ public class Parser {
         });
     }
 
-    // Helpers para guardar/restaurar estado incluyendo los pasos
     void Save(out int p, out int sc, out string sf) {
         p = pos; sc = Steps.Count; sf = currentForm;
     }
@@ -54,16 +54,20 @@ public class Parser {
         return false;
     }
 
-    // A → +CA | -CA | ε
+    // A → +CA | -CA | epsilon
     bool A() {
         Save(out var p, out var sc, out var sf);
 
         RecordStep("A", "+CA");
-        if (Consume('+') && C() && A()) return true;
+        if (Consume('+') && C() && A()){
+            return true;
+        }
         Restore(p, sc, sf);
 
         RecordStep("A", "-CA");
-        if (Consume('-') && C() && A()) return true;
+        if (Consume('-') && C() && A()){
+            return true;
+        }
         Restore(p, sc, sf);
 
         RecordStep("A", "ε");
@@ -74,7 +78,9 @@ public class Parser {
     bool C() {
         Save(out var p, out var sc, out var sf);
         RecordStep("C", "PB");
-        if (P() && B()) return true;
+        if (P() && B()){
+            return true;
+        }
         Restore(p, sc, sf);
         return false;
     }
@@ -84,11 +90,15 @@ public class Parser {
         Save(out var p, out var sc, out var sf);
 
         RecordStep("B", "*PB");
-        if (Consume('*') && P() && B()) return true;
+        if (Consume('*') && P() && B()){
+            return true;
+        }
         Restore(p, sc, sf);
 
         RecordStep("B", "/PB");
-        if (Consume('/') && P() && B()) return true;
+        if (Consume('/') && P() && B()){
+            return true;
+        }
         Restore(p, sc, sf);
 
         RecordStep("B", "ε");
@@ -100,11 +110,15 @@ public class Parser {
         Save(out var p, out var sc, out var sf);
 
         RecordStep("P", "E^P");
-        if (E() && Consume('^') && P()) return true;
+        if (E() && Consume('^') && P()){
+            return true;
+        }
         Restore(p, sc, sf);
 
         RecordStep("P", "E");
-        if (E()) return true;
+        if (E()){
+            return true;
+        }
         Restore(p, sc, sf);
         return false;
     }
@@ -114,11 +128,15 @@ public class Parser {
         Save(out var p, out var sc, out var sf);
 
         RecordStep("E", "-F");
-        if (Consume('-') && F()) return true;
+        if (Consume('-') && F()){
+            return true;
+        }
         Restore(p, sc, sf);
 
         RecordStep("E", "F");
-        if (F()) return true;
+        if (F()){
+            return true;
+        }
         Restore(p, sc, sf);
         return false;
     }
@@ -128,11 +146,15 @@ public class Parser {
         Save(out var p, out var sc, out var sf);
 
         RecordStep("F", "(S)");
-        if (Consume('(') && S() && Consume(')')) return true;
+        if (Consume('(') && S() && Consume(')')){
+            return true;
+        }
         Restore(p, sc, sf);
 
         RecordStep("F", "N");
-        if (N()) return true;
+        if (N()){
+            return true;
+        }
         Restore(p, sc, sf);
         return false;
     }
@@ -142,15 +164,21 @@ public class Parser {
         Save(out var p, out var sc, out var sf);
 
         RecordStep("N", "D.N");
-        if (D() && Consume('.') && N()) return true;
+        if (D() && Consume('.') && N()){
+            return true;
+        }
         Restore(p, sc, sf);
 
         RecordStep("N", "DN");
-        if (D() && N()) return true;
+        if (D() && N()){
+            return true;
+        }
         Restore(p, sc, sf);
 
         RecordStep("N", "D");
-        if (D()) return true;
+        if (D()){
+            return true;
+        }
         Restore(p, sc, sf);
 
         return false;
@@ -158,7 +186,9 @@ public class Parser {
 
     // D → 0 | 1 | ... | 9
     bool D() {
-        if (!isDigit()) return false;
+        if (!isDigit()){
+            return false;
+        }
         RecordStep("D", current().ToString());
         pos++;
         return true;

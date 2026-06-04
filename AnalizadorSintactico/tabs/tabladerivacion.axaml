@@ -22,7 +22,7 @@
                       VerticalScrollBarVisibility="Auto"
                       HorizontalScrollBarVisibility="Disabled"
                       Height="320">
-            <ItemsControl ItemsSource="{Binding Steps}">
+            <ItemsControl ItemsSource="{Binding Steps}" Padding="0,0,0,20">
                 <ItemsControl.ItemTemplate>
                     <DataTemplate x:DataType="local:DerivationStep">
                         <Grid ColumnDefinitions="*,*" Margin="0,0,0,4">

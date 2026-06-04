@@ -9,21 +9,34 @@ namespace AnalizadorSintactico;
 public partial class MainWindow : Window
 {
     string expression = "";
+    bool justCalculated = false;
     bool isValid = true;
 
     public MainWindow() => InitializeComponent();
 
     public void Input(string value)
     {
-      expression += value;
-      Display.Text = expression;
-      ValidarSintaxis(expression);
+        if (justCalculated)
+        {
+            expression = "";
+            justCalculated = false;
+        }
+
+        expression += value;
+
+        Display.Text = expression;
+
+        ValidarSintaxis(expression);
     }
 
     public void Operator(string symbol)
     {
       var op = symbol switch { "÷" => "/", "x" => "*", "-" => "-", _ => symbol };
-      expression += op;
+      if (justCalculated)
+          {
+            justCalculated = false;
+          }
+    expression += op;
       Display.Text = expression;
       ValidarSintaxis(expression);
 
@@ -83,20 +96,28 @@ public partial class MainWindow : Window
         StatusText.Text = "Expresión incorrecta";
         return;
     }
+        ArbolDerivacion.GenerarArbol(expression);
+try
+{
+    string originalExpression = expression;
 
-    try
-    {
-        var expr = expression.Replace("^", "*");
+    var expr = expression.Replace("^", "*");
 
-        var resultado = new System.Data.DataTable()
-            .Compute(expr, null);
+    var resultado = new System.Data.DataTable()
+        .Compute(expr, null);
 
-        Display.Text = resultado.ToString();
+    Display.Text = resultado.ToString();
 
-      Historial.AddEntry($"{expression} = {resultado}");
-        expression = resultado.ToString()!;
-        StatusText.Text = "Expresión correcta";
-    }
+    Historial.AddEntry($"{expression} = {resultado}");
+
+    expression = resultado.ToString()!;
+
+    ArbolDerivacion.GenerarArbol(originalExpression);
+
+    StatusText.Text = "Expresión correcta";
+
+    justCalculated = true;
+}
     catch
     {
         Display.Text = "Error";

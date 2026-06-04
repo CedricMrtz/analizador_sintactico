@@ -1,10 +1,67 @@
 <UserControl xmlns="https://github.com/avaloniaui"
-                            xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-                xmlns:tabs="clr-namespace:AnalizadorSintactico.Tabs"
-                x:DataType="tabs:ArbolDerivacion"
-                            x:Class="AnalizadorSintactico.Tabs.ArbolDerivacion">
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:tabs="clr-namespace:AnalizadorSintactico.Tabs"
+             x:Class="AnalizadorSintactico.Tabs.ArbolDerivacion"
+             x:DataType="tabs:ArbolDerivacion">
+
+    <StackPanel Spacing="8">
+
         <TextBlock Text="Árbol de derivación"
-                 HorizontalAlignment="Center"
-                 VerticalAlignment="Center"
-                 Foreground="#FF64748B"/>
+                   FontSize="18"
+                   FontWeight="SemiBold"
+                   Foreground="#FF0F172A"/>
+
+        <Border Background="White"
+                BorderBrush="#FFE2E8F0"
+                BorderThickness="1"
+                CornerRadius="10"
+                Padding="10">
+
+            <ScrollViewer VerticalScrollBarVisibility="Auto"
+                          HorizontalScrollBarVisibility="Auto"
+                          MaxHeight="350">
+
+                <TreeView x:DataType="tabs:ArbolDerivacion"
+                          ItemsSource="{Binding RootNodes}">
+
+                    <TreeView.Styles>
+
+                        <Style Selector="TreeViewItem">
+                            <Setter Property="Padding" Value="4"/>
+                        </Style>
+
+                    </TreeView.Styles>
+
+                    <TreeView.ItemTemplate>
+
+                        <TreeDataTemplate
+                            x:DataType="tabs:ArbolDerivacion+Nodo"
+                            ItemsSource="{Binding Hijos}">
+
+                            <Border Background="#FFF8FAFC"
+                                    BorderBrush="#FFE2E8F0"
+                                    BorderThickness="1"
+                                    CornerRadius="8"
+                                    Padding="4"
+                                    Margin="2">
+
+                                <TextBlock Text="{Binding Nombre}"
+                                           FontSize="12"
+                                           FontWeight="SemiBold"
+                                           Foreground="#FF0F172A"/>
+
+                            </Border>
+
+                        </TreeDataTemplate>
+
+                    </TreeView.ItemTemplate>
+
+                </TreeView>
+
+            </ScrollViewer>
+
+        </Border>
+
+    </StackPanel>
+
 </UserControl>

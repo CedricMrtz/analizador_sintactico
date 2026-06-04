@@ -25,8 +25,8 @@
     <Button Classes="calc-key operator" Content="+" Click="OnOperator" Grid.Row="3" Grid.Column="3" Margin="3"/>
 
     <Button Classes="calc-key" Content="0" Click="OnInput" Grid.Row="4" Grid.Column="0" Grid.ColumnSpan="2" Margin="3"/>
-    <Button Classes="calc-key danger" Content="Borrar" Click="OnBackspace" Grid.Row="4" Grid.Column="2" Margin="3"/>
-    <Button Classes="calc-key" Content="." Click="OnInput" Grid.Row="4" Grid.Column="2" Margin="3"/>
+    <Button Classes="calc-key" Content="." Click="OnInput" Grid.Row="4" Grid.Column="1" Margin="3"/>
+    <Button Classes="calc-key danger" Content="Del" Click="OnBackspace" Grid.Row="4" Grid.Column="2" Margin="3"/>
     <Button Classes="calc-key operator" Content="=" Click="OnEquals" Grid.Row="4" Grid.Column="3" Margin="3"/>
 
 </Grid>

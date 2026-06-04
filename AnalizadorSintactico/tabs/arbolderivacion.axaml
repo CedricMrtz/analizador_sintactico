@@ -4,8 +4,45 @@
              x:Class="AnalizadorSintactico.Tabs.ArbolDerivacion"
              x:DataType="tabs:ArbolDerivacion">
 
-    <StackPanel Spacing="8">
+    <UserControl.Resources>
+        <DataTemplate x:Key="NodoTemplate" x:DataType="tabs:ArbolDerivacion+Nodo">
+            <StackPanel Spacing="10" HorizontalAlignment="Center">
+                <Border Background="#FFF8FAFC"
+                        BorderBrush="#FFCBD5E1"
+                        BorderThickness="1"
+                        CornerRadius="14"
+                        Padding="12,8"
+                        MinWidth="84"
+                        HorizontalAlignment="Center">
+                    <TextBlock Text="{Binding Nombre}"
+                               FontSize="12"
+                               FontWeight="SemiBold"
+                               Foreground="#FF0F172A"
+                               TextAlignment="Center"/>
+                </Border>
 
+                <StackPanel Spacing="0" HorizontalAlignment="Center">
+                    <Border Width="1"
+                            Height="14"
+                            Background="#FFCBD5E1"
+                            HorizontalAlignment="Center"/>
+
+                    <ItemsControl ItemsSource="{Binding Hijos}"
+                                  ItemTemplate="{StaticResource NodoTemplate}">
+                        <ItemsControl.ItemsPanel>
+                            <ItemsPanelTemplate>
+                                <StackPanel Orientation="Horizontal"
+                                            Spacing="16"
+                                            HorizontalAlignment="Center"/>
+                            </ItemsPanelTemplate>
+                        </ItemsControl.ItemsPanel>
+                    </ItemsControl>
+                </StackPanel>
+            </StackPanel>
+        </DataTemplate>
+    </UserControl.Resources>
+
+    <StackPanel Spacing="8">
         <TextBlock Text="Árbol de derivación"
                    FontSize="18"
                    FontWeight="SemiBold"
@@ -21,42 +58,15 @@
                           HorizontalScrollBarVisibility="Auto"
                           MaxHeight="350">
 
-                <TreeView x:DataType="tabs:ArbolDerivacion"
-                          ItemsSource="{Binding RootNodes}">
-
-                    <TreeView.Styles>
-
-                        <Style Selector="TreeViewItem">
-                            <Setter Property="Padding" Value="4"/>
-                        </Style>
-
-                    </TreeView.Styles>
-
-                    <TreeView.ItemTemplate>
-
-                        <TreeDataTemplate
-                            x:DataType="tabs:ArbolDerivacion+Nodo"
-                            ItemsSource="{Binding Hijos}">
-
-                            <Border Background="#FFF8FAFC"
-                                    BorderBrush="#FFE2E8F0"
-                                    BorderThickness="1"
-                                    CornerRadius="8"
-                                    Padding="4"
-                                    Margin="2">
-
-                                <TextBlock Text="{Binding Nombre}"
-                                           FontSize="12"
-                                           FontWeight="SemiBold"
-                                           Foreground="#FF0F172A"/>
-
-                            </Border>
-
-                        </TreeDataTemplate>
-
-                    </TreeView.ItemTemplate>
-
-                </TreeView>
+                <ItemsControl ItemsSource="{Binding RootNodes}"
+                              ItemTemplate="{StaticResource NodoTemplate}">
+                    <ItemsControl.ItemsPanel>
+                        <ItemsPanelTemplate>
+                            <StackPanel Spacing="16"
+                                        HorizontalAlignment="Center"/>
+                        </ItemsPanelTemplate>
+                    </ItemsControl.ItemsPanel>
+                </ItemsControl>
 
             </ScrollViewer>
 

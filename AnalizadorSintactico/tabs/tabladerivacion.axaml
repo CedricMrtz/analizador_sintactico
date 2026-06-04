@@ -3,8 +3,27 @@
                 xmlns:tabs="clr-namespace:AnalizadorSintactico.Tabs"
                 x:DataType="tabs:TablaDerivacion"
                             x:Class="AnalizadorSintactico.Tabs.TablaDerivacion">
-        <TextBlock Text="Tabla de derivación"
-                 HorizontalAlignment="Center"
-                 VerticalAlignment="Center"
-                 Foreground="#FF64748B"/>
+        <StackPanel Spacing="8">
+            <TextBlock Text="Tabla de derivación"
+                 FontSize="18"
+                 FontWeight="SemiBold"
+                 Foreground="#FF0F172A"/>
+
+            <ListBox ItemsSource="{Binding Tokens}"
+                     Background="Transparent"
+                     BorderThickness="0">
+                <ListBox.ItemTemplate>
+                    <DataTemplate>
+                        <Border Margin="0,0,0,8"
+                                Padding="10"
+                                CornerRadius="10"
+                                Background="White"
+                                BorderBrush="#FFE2E8F0"
+                                BorderThickness="1">
+                            <TextBlock Text="{Binding}" TextWrapping="Wrap" Foreground="#FF334155"/>
+                        </Border>
+                    </DataTemplate>
+                </ListBox.ItemTemplate>
+            </ListBox>
+        </StackPanel>
 </UserControl>
